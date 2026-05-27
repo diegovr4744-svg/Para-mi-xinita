@@ -7,17 +7,32 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
       min-height: 100vh;
-      background: linear-gradient(135deg, #fff0f5 0%, #ffe4ef 40%, #ffd6e7 100%);
+      background-color: #ffd6e7;
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 2rem 1rem 3rem;
       font-family: 'Lato', sans-serif;
+      overflow-x: hidden;
     }
-
+    .flowers-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
     .hearts-bg {
       width: 100%;
       text-align: center;
@@ -27,7 +42,6 @@
       margin-bottom: 1.5rem;
       opacity: 0.5;
     }
-
     .badge {
       background: #e07fa0;
       color: white;
@@ -40,7 +54,6 @@
       border-radius: 999px;
       margin-bottom: 1rem;
     }
-
     .title {
       font-family: 'Playfair Display', serif;
       font-size: 2.4rem;
@@ -50,7 +63,6 @@
       margin-bottom: 0.3rem;
       line-height: 1.2;
     }
-
     .subtitle {
       font-family: 'Playfair Display', serif;
       font-style: italic;
@@ -59,9 +71,8 @@
       text-align: center;
       margin-bottom: 2rem;
     }
-
     .card {
-      background: rgba(255,255,255,0.85);
+      background: rgba(255,255,255,0.88);
       border-radius: 20px;
       border: 1px solid rgba(224, 127, 160, 0.2);
       padding: 2.5rem 2.5rem 2rem;
@@ -69,7 +80,6 @@
       width: 100%;
       position: relative;
     }
-
     .card::before {
       content: '❝';
       font-family: 'Playfair Display', serif;
@@ -81,7 +91,6 @@
       line-height: 1;
       opacity: 0.6;
     }
-
     .letter-greeting {
       font-family: 'Playfair Display', serif;
       font-style: italic;
@@ -90,7 +99,6 @@
       margin-bottom: 1.2rem;
       padding-top: 1rem;
     }
-
     .letter-body {
       font-family: 'Lato', sans-serif;
       font-weight: 300;
@@ -99,9 +107,7 @@
       line-height: 1.9;
       text-align: justify;
     }
-
     .letter-body p { margin-bottom: 1.1rem; }
-
     .letter-sign {
       font-family: 'Playfair Display', serif;
       font-style: italic;
@@ -110,7 +116,6 @@
       margin-top: 1.5rem;
       text-align: right;
     }
-
     .divider {
       display: flex;
       align-items: center;
@@ -120,14 +125,12 @@
       opacity: 0.5;
       font-size: 1.1rem;
     }
-
     .divider::before, .divider::after {
       content: '';
       flex: 1;
       height: 0.5px;
       background: #e07fa0;
     }
-
     .footer {
       margin-top: 2rem;
       display: flex;
@@ -135,31 +138,22 @@
       align-items: center;
       gap: 0.5rem;
     }
-
     .footer-hearts { font-size: 1.5rem; color: #e07fa0; letter-spacing: 0.4rem; }
-
     .footer-text {
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-size: 0.9rem;
       color: #c9678a;
     }
-
-    .floating-heart {
-      display: inline-block;
-      animation: float 3s ease-in-out infinite;
-    }
-
+    .floating-heart { display: inline-block; animation: float 3s ease-in-out infinite; }
     .floating-heart:nth-child(2) { animation-delay: 0.5s; }
     .floating-heart:nth-child(3) { animation-delay: 1s; }
     .floating-heart:nth-child(4) { animation-delay: 1.5s; }
     .floating-heart:nth-child(5) { animation-delay: 2s; }
-
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
     }
-
     .months-stamp {
       background: rgba(224, 127, 160, 0.12);
       border: 1px solid rgba(224, 127, 160, 0.3);
@@ -168,7 +162,6 @@
       text-align: center;
       margin-bottom: 2rem;
     }
-
     .months-stamp .num {
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
@@ -176,9 +169,7 @@
       color: #b5365e;
       line-height: 1;
     }
-
     .months-stamp .label {
-      font-family: 'Lato', sans-serif;
       font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
@@ -189,66 +180,108 @@
 </head>
 <body>
 
-  <div class="hearts-bg">
-    <span class="floating-heart">♥</span>
-    <span class="floating-heart">♥</span>
-    <span class="floating-heart">♥</span>
-    <span class="floating-heart">♥</span>
-    <span class="floating-heart">♥</span>
-  </div>
+  <svg class="flowers-bg" viewBox="0 0 800 1200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <g id="flor">
+        <ellipse cx="0" cy="-9" rx="4" ry="7" fill="#c9547a" opacity="0.55"/>
+        <ellipse cx="0" cy="-9" rx="4" ry="7" fill="#c9547a" opacity="0.55" transform="rotate(60)"/>
+        <ellipse cx="0" cy="-9" rx="4" ry="7" fill="#c9547a" opacity="0.55" transform="rotate(120)"/>
+        <ellipse cx="0" cy="-9" rx="4" ry="7" fill="#c9547a" opacity="0.55" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-9" rx="4" ry="7" fill="#c9547a" opacity="0.55" transform="rotate(240)"/>
+        <ellipse cx="0" cy="-9" rx="4" ry="7" fill="#c9547a" opacity="0.55" transform="rotate(300)"/>
+        <circle cx="0" cy="0" r="3.5" fill="#e07fa0" opacity="0.8"/>
+      </g>
+      <g id="flor-sm">
+        <ellipse cx="0" cy="-6" rx="3" ry="5" fill="#c9547a" opacity="0.45"/>
+        <ellipse cx="0" cy="-6" rx="3" ry="5" fill="#c9547a" opacity="0.45" transform="rotate(60)"/>
+        <ellipse cx="0" cy="-6" rx="3" ry="5" fill="#c9547a" opacity="0.45" transform="rotate(120)"/>
+        <ellipse cx="0" cy="-6" rx="3" ry="5" fill="#c9547a" opacity="0.45" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-6" rx="3" ry="5" fill="#c9547a" opacity="0.45" transform="rotate(240)"/>
+        <ellipse cx="0" cy="-6" rx="3" ry="5" fill="#c9547a" opacity="0.45" transform="rotate(300)"/>
+        <circle cx="0" cy="0" r="2.5" fill="#e07fa0" opacity="0.7"/>
+      </g>
+      <g id="flor-lg">
+        <ellipse cx="0" cy="-12" rx="5" ry="9" fill="#c9547a" opacity="0.4"/>
+        <ellipse cx="0" cy="-12" rx="5" ry="9" fill="#c9547a" opacity="0.4" transform="rotate(60)"/>
+        <ellipse cx="0" cy="-12" rx="5" ry="9" fill="#c9547a" opacity="0.4" transform="rotate(120)"/>
+        <ellipse cx="0" cy="-12" rx="5" ry="9" fill="#c9547a" opacity="0.4" transform="rotate(180)"/>
+        <ellipse cx="0" cy="-12" rx="5" ry="9" fill="#c9547a" opacity="0.4" transform="rotate(240)"/>
+        <ellipse cx="0" cy="-12" rx="5" ry="9" fill="#c9547a" opacity="0.4" transform="rotate(300)"/>
+        <circle cx="0" cy="0" r="4.5" fill="#e07fa0" opacity="0.65"/>
+      </g>
+    </defs>
+    <use href="#flor" transform="translate(40,60)"/>
+    <use href="#flor-sm" transform="translate(100,30)"/>
+    <use href="#flor-lg" transform="translate(160,90)"/>
+    <use href="#flor" transform="translate(700,50)"/>
+    <use href="#flor-sm" transform="translate(760,100)"/>
+    <use href="#flor-lg" transform="translate(640,30)"/>
+    <use href="#flor-sm" transform="translate(20,180)"/>
+    <use href="#flor" transform="translate(780,200)"/>
+    <use href="#flor-lg" transform="translate(70,280)"/>
+    <use href="#flor-sm" transform="translate(730,260)"/>
+    <use href="#flor" transform="translate(30,400)"/>
+    <use href="#flor-lg" transform="translate(770,380)"/>
+    <use href="#flor-sm" transform="translate(90,480)"/>
+    <use href="#flor" transform="translate(720,460)"/>
+    <use href="#flor-lg" transform="translate(50,580)"/>
+    <use href="#flor-sm" transform="translate(760,560)"/>
+    <use href="#flor" transform="translate(120,660)"/>
+    <use href="#flor-lg" transform="translate(690,640)"/>
+    <use href="#flor-sm" transform="translate(30,750)"/>
+    <use href="#flor" transform="translate(780,720)"/>
+    <use href="#flor-lg" transform="translate(80,840)"/>
+    <use href="#flor-sm" transform="translate(740,820)"/>
+    <use href="#flor" transform="translate(40,940)"/>
+    <use href="#flor-lg" transform="translate(770,900)"/>
+    <use href="#flor-sm" transform="translate(110,1020)"/>
+    <use href="#flor" transform="translate(700,1000)"/>
+    <use href="#flor-lg" transform="translate(50,1100)"/>
+    <use href="#flor-sm" transform="translate(760,1080)"/>
+    <use href="#flor" transform="translate(130,1160)"/>
+    <use href="#flor-lg" transform="translate(680,1140)"/>
+    <use href="#flor-sm" transform="translate(200,140)"/>
+    <use href="#flor" transform="translate(580,160)"/>
+    <use href="#flor-sm" transform="translate(350,20)"/>
+    <use href="#flor-lg" transform="translate(450,1180)"/>
+    <use href="#flor-sm" transform="translate(300,1150)"/>
+  </svg>
 
-  <div class="badge">Diego & Constanza</div>
-
-  <h1 class="title">Para mi xinita</h1>
-  <p class="subtitle">con todo mi amor, hoy y siempre</p>
-
-  <div class="months-stamp">
-    <div class="num">8</div>
-    <div class="label">meses juntos</div>
-  </div>
-
-  <div class="card">
-    <p class="letter-greeting">Mi amor,</p>
-
-    <div class="letter-body">
-      <p>
-        Hoy cumplimos 8 meses juntos, y aunque para algunas personas eso pueda parecer poco,
-        o crean que no es para tanto, yo quiero que sepas que estos 8 meses a tu lado
-        han sido, sin ninguna duda, los mejores de mi vida. Cada día contigo es un regalo
-        que no me canso de recibir.
-      </p>
-      <p>
-        Amo cada segundo que estoy a tu lado. Amo tus gestos, tu manera de ver la vida,
-        esa forma tan tuya de hacer que todo se sienta más liviano y más bonito. Contigo
-        aprendí lo que es querer de verdad, con calma y con alegría al mismo tiempo.
-      </p>
-      <p>
-        Quiero agradecerte, Cony, por la paciencia que me has tenido desde el primer segundo.
-        Sé que no siempre soy fácil, que a veces me pierdo en mis pensamientos o no encuentro
-        las palabras exactas, pero tú siempre estás ahí, con esa paciencia infinita que me
-        desarma y me enamora cada vez más. Gracias por quedarte, por entenderme,
-        y por elegirme todos los días.
-      </p>
-      <p>
-        Estos 8 meses son solo el comienzo de todo lo que quiero vivir contigo. Hay tantos
-        momentos que nos faltan por compartir, tantas risas, tantas aventuras y tantos
-        recuerdos que todavía no hemos creado. Y yo quiero vivirlos todos, cada uno,
-        de tu mano.
-      </p>
-      <p>
-        Gracias por ser mi persona, mi calma y mi alegría. Te amo más de lo que las
-        palabras pueden decir.
-      </p>
+  <div class="content">
+    <div class="hearts-bg">
+      <span class="floating-heart">♥</span>
+      <span class="floating-heart">♥</span>
+      <span class="floating-heart">♥</span>
+      <span class="floating-heart">♥</span>
+      <span class="floating-heart">♥</span>
     </div>
 
-    <div class="divider">♥</div>
+    <div class="badge">Diego & Constanza</div>
+    <h1 class="title">Para mi xinita</h1>
+    <p class="subtitle">con todo mi amor, hoy y siempre</p>
 
-    <p class="letter-sign">Con todo mi amor, tu Diego ♥</p>
-  </div>
+    <div class="months-stamp">
+      <div class="num">8</div>
+      <div class="label">meses juntos</div>
+    </div>
 
-  <div class="footer">
-    <div class="footer-hearts">♥ ♥ ♥</div>
-    <p class="footer-text">8 meses · El comienzo de siempre</p>
+    <div class="card">
+      <p class="letter-greeting">Mi amor,</p>
+      <div class="letter-body">
+        <p>Hoy cumplimos 8 meses juntos, y aunque para algunas personas eso pueda parecer poco, o crean que no es para tanto, yo quiero que sepas que estos 8 meses a tu lado han sido, sin ninguna duda, los mejores de mi vida. Cada día contigo es un regalo que no me canso de recibir.</p>
+        <p>Amo cada segundo que estoy a tu lado. Amo tus gestos, tu manera de ver la vida, esa forma tan tuya de hacer que todo se sienta más liviano y más bonito. Contigo aprendí lo que es querer de verdad, con calma y con alegría al mismo tiempo.</p>
+        <p>Quiero agradecerte, Cony, por la paciencia que me has tenido desde el primer segundo. Sé que no siempre soy fácil, que a veces me pierdo en mis pensamientos o no encuentro las palabras exactas, pero tú siempre estás ahí, con esa paciencia infinita que me desarma y me enamora cada vez más. Gracias por quedarte, por entenderme, y por elegirme todos los días.</p>
+        <p>Estos 8 meses son solo el comienzo de todo lo que quiero vivir contigo. Hay tantos momentos que nos faltan por compartir, tantas risas, tantas aventuras y tantos recuerdos que todavía no hemos creado. Y yo quiero vivirlos todos, cada uno, de tu mano.</p>
+        <p>Gracias por ser mi persona, mi calma y mi alegría. Te amo más de lo que las palabras pueden decir.</p>
+      </div>
+      <div class="divider">♥</div>
+      <p class="letter-sign">Con todo mi amor, tu Pitufo ♥</p>
+    </div>
+
+    <div class="footer">
+      <div class="footer-hearts">♥ ♥ ♥</div>
+      <p class="footer-text">8 meses · El comienzo de siempre</p>
+    </div>
   </div>
 
 </body>
